@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./modalStyle.css";
 
 const AddSiteModal = ({ isOpen, onClose, onSubmit }) => {
-  const [name, setName] = useState("");  const [image, setImage] = useState("");
+  const [name, setName] = useState("");  
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -12,7 +12,7 @@ const Image = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/images/task/${taskId}`)
+    axios.get(`${import.meta.env.VITE_REACT_URL}/api/images/task/${taskId}`)
       .then(response => {
         setImages(response.data);
         if (response.data.length > 0) {
@@ -25,7 +25,7 @@ const Image = () => {
   }, [taskId]);
 
   const handleAddImage = (newImage) => {
-    axios.post('http://localhost:8080/api/images/save', newImage)
+    axios.post(`${import.meta.env.VITE_REACT_URL}/api/images/save`, newImage)
       .then(response => {
         setImages([...images, response.data]);
       })
@@ -36,7 +36,7 @@ const Image = () => {
 
   const handleImageDelete = (id) => {
     if (confirm("Are you sure you want to delete this image?")) {
-      axios.delete(`http://localhost:8080/api/images/${id}`)
+      axios.delete(`${import.meta.env.VITE_REACT_URL}/api/images/${id}`)
         .then(() => {
           setImages(images.filter(image => image.id !== id));
         })

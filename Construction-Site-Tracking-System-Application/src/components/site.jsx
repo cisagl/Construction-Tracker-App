@@ -10,7 +10,7 @@ const Site = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/sites')
+    axios.get(`${import.meta.env.VITE_REACT_URL}/api/sites`)
       .then(response => {
         setSites(response.data);
       })
@@ -20,7 +20,7 @@ const Site = () => {
   }, []);
 
   const handleAddSite = (newSite) => {
-    axios.post('http://localhost:8080/api/sites/save', newSite)
+    axios.post(`${import.meta.env.VITE_REACT_URL}/api/sites/save`, newSite)
       .then(response => {
         setSites([...sites, response.data]);
       })
@@ -31,7 +31,7 @@ const Site = () => {
 
   const handleSiteDelete = (id) => {
     if (confirm("Are you sure you want to delete this construction site?")) {
-      axios.delete(`http://localhost:8080/api/sites/${id}`)
+      axios.delete(`${import.meta.env.VITE_REACT_URL}/api/sites/${id}`)
         .then(() => {
           setSites(sites.filter(site => site.id !== id));
         })

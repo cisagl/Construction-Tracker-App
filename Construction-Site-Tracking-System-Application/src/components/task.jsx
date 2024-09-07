@@ -11,7 +11,7 @@ const Task = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/tasks/site/${id}`)
+    axios.get(`${import.meta.env.VITE_REACT_URL}/api/tasks/site/${id}`)
       .then(response => {
         setTasks(response.data);
       })
@@ -21,7 +21,7 @@ const Task = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/sites')
+    axios.get(`${import.meta.env.VITE_REACT_URL}/api/sites`)
       .then(response => {
         const selectedSite = response.data.find(site => site.id === parseInt(id));
         if (selectedSite) {
@@ -35,7 +35,7 @@ const Task = () => {
 
   const handleTaskDelete = (id) => {
     if (confirm("Are you sure you want to delete this task?")) {
-      axios.delete(`http://localhost:8080/api/tasks/${id}`)
+      axios.delete(`${import.meta.env.VITE_REACT_URL}/api/tasks/${id}`)
         .then(() => {
           setTasks(tasks.filter(task => task.id !== id));
         })
@@ -46,7 +46,7 @@ const Task = () => {
   };
 
   const handleAddTask = (newTask) => {
-    axios.post("http://localhost:8080/api/tasks/save", newTask)
+    axios.post(`${import.meta.env.VITE_REACT_URL}/api/tasks/save`, newTask)
       .then(response => {
         setTasks([...tasks, response.data]);
       })
